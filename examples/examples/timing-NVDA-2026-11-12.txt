@@ -1,0 +1,41 @@
+NVDA  Thu 2026-11-12 11:30 ET  opening-range breakout (15-minute range) on 5-minute bars (Yahoo, free, can lag)
+Opening range 9:30-9:45: high $162.33, low $148.80 (3 of 3 bars).
+TRIGGERED 10:00 AM at $162.66: the 9:55 bar (bar 5) closed above the range high $162.33 (+0.20%).
+That was 90 minutes ago; the last close is $165.49 (11:25 bar). A late entry is a different trade: the price, the stop distance and the odds have moved.
+Nothing was placed.
+Next: set the stop and target BEFORE you buy: /trader-exit (exit.py plan --from trader/entry.json).
+Wrote trader/entry.json (status triggered).
+
+Exit plan: NVDA long, Thu 2026-11-12, opening-range breakout on 5-minute bars
+  Entry         $162.66 at 10:00 AM (bar 5)
+  Stop          $155.56  opening-range midpoint: ($162.33 + $148.80) / 2 = $155.565, rounded down
+  Target        $169.76  1R (one times the risk)
+  Risk a share  $7.10 (4.36% of the entry)
+  Reward:risk   1.0
+  Flat by       15:55 ET, win or lose: no overnight hold
+Set before the entry. If price hits the stop, you are out; never move it further away.
+A stop is a plan, not a guarantee: a gap or a fast market can fill past it.
+Wrote trader/plan.json.
+Next: /trader-timemachine replays it, then /trader-budget sizes it to your max loss. Nothing was placed.
+
+NVDA buy, Thursday 2026-11-12: entry 162.66 at 10:00 AM (bar 5), stop 155.56, target 169.76 (1R, risk 7.10 a share).
+10,000 replays of the rest of the session, 10:00 AM to 4:00 PM (72 five-minute bars), seed 19.
+Each bar is drawn whole from NVDA's own 5-min bars at the same time of day (+-2 bars) over its last 51 full sessions (2026-09-01 to 2026-11-11).
+
+  target first   2.0 %
+  stop first     0.5 %
+  neither        97.5 %   still open at 4:00 PM
+  green          37.7 %   target first, or above the entry at 4:00 PM
+
+  Price at 4:00 PM: median 161.84, 90 % of replays between 158.13 and 165.58.
+  Average R: -0.091 (R = the 7.10 risk: +1R at the target, -1R at the stop).
+
+History: the same rule (15-min opening range, stop at the opening-range midpoint, 1R target) on each of those 51 real sessions fired 28 times: 9 target, 12 stop, 7 neither. Average R -0.126.
+
+Strongly toward the target: target first 2.0 % vs stop first 0.5 %.
+97.5 % of the replays hit neither by 4:00 PM; the price at 4:00 PM decides those.
+Average R is -0.091 all the same: the replays that hit neither pull it the other way.
+
+A simulation built from NVDA's own last 51 full sessions. It is not a prediction: earnings, news and halts can do things those sessions never did. Same seed, same numbers. Repeat this run with --seed 19.
+Wrote trader/timemachine.json.
+Next: /trader-budget sizes it to your budget and your max loss per trade.
