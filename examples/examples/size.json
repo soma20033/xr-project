@@ -1,7 +1,0 @@
-{
- "shares": 6,
- "position_usd": 918.0,
- "loss_at_stop_usd": 48.0,
- "loss_pct_of_account": 0.96,
- "limited_by": "risk"
-}
